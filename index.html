@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>61 Kingdom — East Africa Safari & Tours</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* ── HERO ── */
+  .hero {
+    height: 100vh; position: relative;
+    display: flex; align-items: flex-end; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(26,23,20,0.15) 0%, rgba(26,23,20,0.55) 100%),
+      url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1800&q=80') center/cover no-repeat;
+    transform: scale(1.04);
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.0); } }
+  .hero-content { position: relative; padding: 0 60px 80px; max-width: 700px; }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(52px, 7vw, 88px); font-weight: 300; line-height: 1.03;
+    color: var(--white); margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.9s 0.65s ease forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--clay); }
+  .hero-sub {
+    font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.75);
+    max-width: 420px; margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.9s 0.85s ease forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 20px; align-items: center;
+    opacity: 0; animation: fadeUp 0.9s 1.05s ease forwards;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 40px; right: 60px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    opacity: 0; animation: fadeIn 1s 1.5s ease forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    animation: scrollPulse 2s 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:.5;transform:scaleY(1);} 50%{opacity:1;transform:scaleY(1.2);} }
+
+  /* ── PILLARS ── */
+  .pillars { background: var(--sand); padding: 80px 60px; }
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: rgba(26,23,20,0.1); margin-top: 60px;
+  }
+  .pillar { background: var(--sand); padding: 48px 40px; transition: background 0.3s; }
+  .pillar:hover { background: #EDE6DB; }
+  .pillar-num {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 300;
+    color: rgba(200,169,126,0.3); margin-bottom: 20px; line-height: 1;
+  }
+  .pillar h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 14px; }
+  .pillar p { font-size: 14px; line-height: 1.75; color: var(--stone); }
+
+  /* ── DESTINATIONS ── */
+  .destinations { padding: 120px 60px; }
+  .dest-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .dest-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 300px; gap: 2px;
+  }
+  .dest-card { position: relative; overflow: hidden; cursor: pointer; }
+  .dest-card:first-child { grid-row: 1/3; }
+  .dest-card-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s ease; }
+  .dest-card:hover .dest-card-img { transform: scale(1.06); }
+  .dest-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,23,20,0.7) 0%, rgba(26,23,20,0.05) 60%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 30px 28px;
+  }
+  .dest-card-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 6px; }
+  .dest-card h3 { font-family: var(--font-serif); font-size: 26px; font-weight: 300; color: var(--white); }
+  .dest-card:first-child h3 { font-size: 38px; }
+
+  /* ── TOURS ── */
+  .tours { background: var(--ink); padding: 120px 60px; }
+  .tours .section-title { color: var(--white); }
+  .tours-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .tour-row {
+    display: grid; grid-template-columns: 80px 1fr 160px 120px;
+    align-items: center; gap: 40px; padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    transition: padding-left 0.3s ease; cursor: pointer;
+  }
+  .tour-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .tour-row:hover { padding-left: 20px; }
+  .tour-idx { font-family: var(--font-serif); font-size: 13px; color: rgba(200,169,126,0.5); letter-spacing: 0.1em; }
+  .tour-name { font-family: var(--font-serif); font-size: 22px; font-weight: 300; color: var(--white); }
+  .tour-tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); }
+  .tour-dur { font-size: 12px; color: rgba(255,255,255,0.4); text-align: right; }
+
+  /* ── STORY ── */
+  .story { padding: 120px 60px; }
+  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .story-text .section-title { margin-bottom: 28px; }
+  .story-text p { font-size: 15px; line-height: 1.85; color: var(--stone); margin-bottom: 24px; }
+  .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+  .stat-num { font-family: var(--font-serif); font-size: 48px; font-weight: 300; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); margin-top: 6px; }
+  .story-images { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 180px 220px; gap: 4px; }
+  .story-img { background-size: cover; background-position: center; }
+  .story-img:nth-child(1) { grid-row:1/2; grid-column:1/2; }
+  .story-img:nth-child(2) { grid-row:1/3; grid-column:2/3; }
+  .story-img:nth-child(3) { grid-row:2/4; grid-column:1/2; }
+  .story-img:nth-child(4) { grid-row:3/4; grid-column:2/3; }
+
+  /* ── BLOGS ── */
+  .blogs { background: var(--sand); padding: 120px 60px; }
+  .blogs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .blogs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .blog-card { background: var(--white); }
+  .blog-img { height: 220px; overflow: hidden; }
+  .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; display: block; }
+  .blog-card:hover .blog-img img { transform: scale(1.05); }
+  .blog-body { padding: 28px 28px 36px; }
+  .blog-cat { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 10px; }
+  .blog-title { font-family: var(--font-serif); font-size: 20px; font-weight: 400; line-height: 1.3; color: var(--ink); margin-bottom: 12px; }
+  .blog-date { font-size: 12px; color: var(--stone); }
+
+  /* ── CONTACT ── */
+  .contact-strip { padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .contact-right { display: flex; flex-direction: column; gap: 24px; }
+  .contact-submit {
+    align-self: flex-start; font-family: var(--font-sans);
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); background: var(--ink); border: none;
+    padding: 16px 36px; cursor: pointer; margin-top: 8px; transition: background 0.3s;
+  }
+  .contact-submit:hover { background: #333; }
+  .contact-field select { appearance: none; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">61 Kingdom</a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#tours">Tours</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="pages/services.html">Services</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Plan a Trip</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">East Africa Safari &amp; Cultural Journeys</p>
+    <h1 class="hero-title">Discover the<br><em>True Spirit</em><br>of Africa</h1>
+    <p class="hero-sub">Handcrafted safaris, cultural encounters, and extraordinary journeys across Kenya and East Africa — designed for those who seek more than tourism.</p>
+    <div class="hero-actions">
+      <a href="#tours" class="btn-clay">Explore Journeys</a>
+      <a href="pages/about.html" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<div class="pillars">
+  <div class="pillars-grid reveal">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <h3>Curated Safaris</h3>
+      <p>Carefully crafted wildlife experiences, luxury lodges, and adventure activities across Kenya and East Africa designed to be unforgettable.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <h3>Tailor-Made Journeys</h3>
+      <p>From private safaris to cultural tours and executive retreats — every journey is designed to fit your style, interests, and budget.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <h3>Travel You Can Trust</h3>
+      <p>We handle flights, accommodations, transfers, and permits so you can focus entirely on the experience. Hassle-free, start to finish.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="dest-header reveal">
+    <div>
+      <span class="section-label">Where to go</span>
+      <h2 class="section-title">Top Destinations</h2>
+    </div>
+    <a href="#" class="link-clay">View all →</a>
+  </div>
+  <div class="dest-grid reveal">
+    <div class="dest-card">
+      <div class="dest-card-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1000&q=80')"></div>
+      <div class="dest-card-overlay"><span class="dest-card-label">East Africa</span><h3>Kenya</h3></div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img" style="background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80')"></div>
+      <div class="dest-card-overlay"><span class="dest-card-label">East Africa</span><h3>Tanzania</h3></div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img" style="background-image:url('https://images.unsplash.com/photo-1580289143186-03f54224f769?w=800&q=80')"></div>
+      <div class="dest-card-overlay"><span class="dest-card-label">East Africa</span><h3>Uganda</h3></div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?w=800&q=80')"></div>
+      <div class="dest-card-overlay"><span class="dest-card-label">East Africa</span><h3>Rwanda</h3></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOURS -->
+<section class="tours" id="tours">
+  <div class="tours-header reveal">
+    <div>
+      <span class="section-label">Selected journeys</span>
+      <h2 class="section-title">Popular Experiences</h2>
+    </div>
+    <a href="#" class="link-clay">All tours →</a>
+  </div>
+  <div class="reveal">
+    <div class="tour-row"><span class="tour-idx">AP 01</span><span class="tour-name">Under the African Sky</span><span class="tour-tag">Kenya · Safari</span><span class="tour-dur">11 Days / 10 Nights</span></div>
+    <div class="tour-row"><span class="tour-idx">AP 03</span><span class="tour-name">Living Cultures &amp; Archaeology of Kenya</span><span class="tour-tag">Cultural Tour</span><span class="tour-dur">9 Days / 8 Nights</span></div>
+    <div class="tour-row"><span class="tour-idx">AP 04</span><span class="tour-name">African Time Experience</span><span class="tour-tag">Kenya · Safari</span><span class="tour-dur">12 Days / 11 Nights</span></div>
+    <div class="tour-row"><span class="tour-idx">AP 06</span><span class="tour-name">Women of Kenya Safari</span><span class="tour-tag">Cultural Tour</span><span class="tour-dur">9 Days / 8 Nights</span></div>
+    <div class="tour-row"><span class="tour-idx">AP 08</span><span class="tour-name">The Sound of Africa</span><span class="tour-tag">Diani Beach</span><span class="tour-dur">11 Days / 10 Nights</span></div>
+    <div class="tour-row"><span class="tour-idx">AP 09</span><span class="tour-name">Spirit of the Land &amp; Coastal Wisdom</span><span class="tour-tag">Swahili Coast</span><span class="tour-dur">9 Days / 5 Nights</span></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="about">
+  <div class="story-inner">
+    <div class="story-text reveal">
+      <span class="section-label">Who we are</span>
+      <h2 class="section-title">More Than Two Decades of African Expertise</h2>
+      <p>61 Kingdom was founded with a clear vision — to create meaningful journeys across Kenya and East Africa that combine authenticity, professionalism, and deep local expertise.</p>
+      <div class="story-stats">
+        <div><div class="stat-num">20+</div><div class="stat-label">Years Experience</div></div>
+        <div><div class="stat-num">4</div><div class="stat-label">Countries</div></div>
+        <div><div class="stat-num">9+</div><div class="stat-label">Curated Tours</div></div>
+        <div><div class="stat-num">∞</div><div class="stat-label">Memories Created</div></div>
+      </div>
+    </div>
+    <div class="story-images reveal reveal-d1">
+      <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=600&q=80')"></div>
+      <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1504432842672-1a79f78e4084?w=600&q=80')"></div>
+      <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=600&q=80')"></div>
+      <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS -->
+<section class="blogs">
+  <div class="blogs-header reveal">
+    <div><span class="section-label">From the field</span><h2 class="section-title">Inspiration &amp; Stories</h2></div>
+    <a href="#" class="link-clay">All stories →</a>
+  </div>
+  <div class="blogs-grid reveal">
+    <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600&q=80" alt="Kenya"></div><div class="blog-body"><p class="blog-cat">Kenya</p><h3 class="blog-title">Discover the True Spirit of Kenya</h3><p class="blog-date">6 Jun, 2025</p></div></div>
+    <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80" alt="East Africa"></div><div class="blog-body"><p class="blog-cat">East Africa</p><h3 class="blog-title">Experience the Beauty of East African Safaris</h3><p class="blog-date">23 Mar, 2026</p></div></div>
+    <div class="blog-card"><div class="blog-img"><img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" alt="Planning"></div><div class="blog-body"><p class="blog-cat">Kenya</p><h3 class="blog-title">How to Plan the Perfect Trip to Kenya</h3><p class="blog-date">23 Mar, 2026</p></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-strip" id="contact">
+  <div class="reveal">
+    <span class="section-label">Get in touch</span>
+    <h2 class="section-title">Ready to Begin<br>Your Journey?</h2>
+    <div style="margin-top:40px;">
+      <p style="font-size:13px;color:var(--stone);margin-bottom:6px;">GTC, Westlands, Nairobi</p>
+      <p style="font-size:13px;color:var(--stone);margin-bottom:6px;">+254 1141466085</p>
+      <p style="font-size:13px;color:var(--stone);">info@61kingdom.com</p>
+    </div>
+  </div>
+  <div class="contact-right reveal reveal-d1">
+    <div class="form-field"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+    <div class="form-field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+    <div class="form-field"><label>Destination</label><select><option>Kenya</option><option>Tanzania</option><option>Uganda</option><option>Rwanda</option></select></div>
+    <button class="contact-submit">Send Enquiry</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <h2>61 Kingdom</h2>
+    <p>Don't just get there — get there in style.</p>
+    <p>GTC, Westlands, Nairobi</p>
+    <p>+254 1141466085</p>
+    <p>info@61kingdom.com</p>
+  </div>
+  <div class="footer-col"><h4>Destinations</h4><ul><li><a href="#">Kenya</a></li><li><a href="#">Tanzania</a></li><li><a href="#">Uganda</a></li><li><a href="#">Rwanda</a></li></ul></div>
+  <div class="footer-col"><h4>Information</h4><ul><li><a href="pages/about.html">About Us</a></li><li><a href="#">Tours</a></li><li><a href="pages/services.html">Services</a></li><li><a href="#">Blogs</a></li></ul></div>
+  <div class="footer-col"><h4>Pages</h4><ul><li><a href="pages/photo-challenge.html">Photo Challenge</a></li><li><a href="#">Gallery</a></li><li><a href="#">Travel Tips</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 61 Kingdom. All rights reserved.</p>
+  <p>Facebook · Instagram · YouTube</p>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

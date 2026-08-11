@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — 61 Kingdom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --clay:  #C8A97E;
+    --ink:   #1A1714;
+    --sand:  #F4EFE8;
+    --stone: #8C8075;
+    --white: #FDFCFA;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    background: rgba(253,252,250,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,23,20,0.08);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: var(--ink); letter-spacing: 0.15em;
+    text-decoration: none; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; color: var(--stone); transition: color 0.3s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--clay); }
+  .nav-cta {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--white);
+    background: var(--clay); padding: 10px 24px;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: #b8976a; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    height: 60vh; min-height: 480px;
+    position: relative;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(26,23,20,0.2) 0%, rgba(26,23,20,0.65) 100%),
+      url('https://images.unsplash.com/photo-1549366021-9f761d450615?w=1800&q=80') center/cover no-repeat;
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.04); }
+    to   { transform: scale(1.0); }
+  }
+  .page-hero-content {
+    position: relative; padding: 0 60px 72px; width: 100%;
+  }
+  .breadcrumb {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 18px;
+    opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+  .breadcrumb a { color: var(--clay); text-decoration: none; }
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 6vw, 80px);
+    font-weight: 300; line-height: 1.04;
+    color: var(--white);
+    opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--clay); }
+  .page-hero-sub {
+    font-size: 15px; color: rgba(255,255,255,0.65);
+    max-width: 520px; margin-top: 18px; line-height: 1.7;
+    opacity: 0; animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INTRO ── */
+  .intro { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .intro-left .section-label { margin-bottom: 16px; }
+  .intro-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.5vw, 48px); font-weight: 300; line-height: 1.1;
+    color: var(--ink); margin-bottom: 40px;
+  }
+  .intro-left h2 em { font-style: italic; color: var(--clay); }
+  .intro-stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid rgba(26,23,20,0.1); margin-top: 50px; padding-top: 40px;
+  }
+  .intro-stat { padding-right: 24px; }
+  .intro-stat + .intro-stat { border-left: 1px solid rgba(26,23,20,0.1); padding-left: 24px; padding-right: 0; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: var(--ink); line-height: 1;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); margin-top: 6px; }
+
+  .intro-right { padding-top: 8px; }
+  .intro-right p { font-size: 15px; line-height: 1.85; color: var(--stone); margin-bottom: 24px; }
+  .intro-right p:last-child { margin-bottom: 0; }
+
+  /* ── VISION MISSION ── */
+  .vm { background: var(--ink); padding: 100px 60px; }
+  .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px; }
+  .vm-card { background: rgba(255,255,255,0.04); padding: 52px 48px; border: 1px solid rgba(255,255,255,0.06); }
+  .vm-card:hover { background: rgba(255,255,255,0.07); }
+  .vm-icon {
+    width: 36px; height: 1px; background: var(--clay); margin-bottom: 28px;
+  }
+  .vm-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--white); margin-bottom: 20px;
+  }
+  .vm-card p { font-size: 14px; line-height: 1.85; color: var(--stone); }
+
+  /* ── VALUES ── */
+  .values { padding: 120px 60px; }
+  .values-header { margin-bottom: 70px; }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(26,23,20,0.1); }
+  .value-card { background: var(--white); padding: 44px 32px; transition: background 0.3s; }
+  .value-card:hover { background: var(--sand); }
+  .value-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 300;
+    color: rgba(200,169,126,0.25); line-height: 1; margin-bottom: 20px;
+  }
+  .value-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 14px;
+  }
+  .value-card p { font-size: 13px; line-height: 1.8; color: var(--stone); }
+
+  /* ── IMAGE BREAK ── */
+  .image-break {
+    height: 480px;
+    background:
+      linear-gradient(to right, rgba(26,23,20,0.55) 0%, rgba(26,23,20,0.1) 60%),
+      url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1800&q=80') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 0 60px;
+  }
+  .image-break-quote {
+    max-width: 540px;
+  }
+  .image-break-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3vw, 38px); font-weight: 300; font-style: italic;
+    color: var(--white); line-height: 1.35;
+    border-left: 2px solid var(--clay); padding-left: 28px;
+  }
+  .image-break-quote span {
+    display: block; margin-top: 20px; padding-left: 30px;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--clay);
+  }
+
+  /* ── TEAM ── */
+  .team { background: var(--sand); padding: 120px 60px; }
+  .team-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 70px; }
+  
+  /* Leadership row */
+  .team-leadership { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 2px; }
+  /* Full team grid */
+  .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+
+  .member-card { background: var(--white); overflow: hidden; }
+  .member-card:hover .member-img-wrap img { transform: scale(1.05); }
+  .member-img-wrap { height: 260px; overflow: hidden; }
+  .member-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.6s ease; }
+  .member-img-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #e8e0d5 0%, #d4c9bb 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .member-img-placeholder span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; color: var(--clay); font-weight: 300;
+  }
+  .member-info { padding: 20px 20px 24px; }
+  .member-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 4px;
+  }
+  .member-info p { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); }
+
+  .team-section-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--stone); margin: 40px 0 12px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(26,23,20,0.08);
+  }
+
+  /* ── CONTACT ── */
+  .contact { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .contact-left .section-title { margin-bottom: 50px; }
+  .contact-detail { display: flex; flex-direction: column; gap: 36px; }
+  .contact-item {}
+  .contact-item-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 8px; }
+  .contact-item-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--ink); }
+  .contact-item-val a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
+  .contact-item-val a:hover { color: var(--clay); }
+  .map-link {
+    display: inline-block; margin-top: 6px; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--clay); text-decoration: none;
+    border-bottom: 1px solid var(--clay); padding-bottom: 1px;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 32px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; }
+  .form-field label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); }
+  .form-field input, .form-field textarea {
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(26,23,20,0.18);
+    padding: 10px 0; font-size: 15px;
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    color: var(--ink); outline: none; width: 100%;
+    transition: border-color 0.3s; resize: none;
+  }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--clay); }
+  .form-submit {
+    align-self: flex-start;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); background: var(--ink);
+    border: none; padding: 16px 36px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.3s;
+  }
+  .form-submit:hover { background: #333; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 60px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--white);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .footer-brand p { font-size: 13px; line-height: 1.7; color: var(--stone); margin-bottom: 24px; }
+  .footer-contact-item { font-size: 13px; color: var(--stone); margin-bottom: 6px; }
+  .footer-col h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 24px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 13px; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    background: var(--ink); padding: 20px 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
+
+  /* ── HELPERS ── */
+  .section-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 3.5vw, 48px); font-weight: 300; line-height: 1.1; color: var(--ink); }
+  .divider { border: none; border-top: 1px solid rgba(26,23,20,0.08); margin: 0; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">61 Kingdom</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#destinations">Destinations</a></li>
+    <li><a href="#">Tours</a></li>
+    <li><a href="#" class="active">About</a></li>
+    <li><a href="#">Stories</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Plan a Trip</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="breadcrumb"><a href="../index.html">Home</a> &nbsp;/&nbsp; About Us</p>
+    <h1>Designing <em>Meaningful</em><br>Journeys in Kenya</h1>
+    <p class="page-hero-sub">A Kenya-based destination management company with over 20 years of expertise crafting seamless, authentic travel programs across East Africa.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-left reveal">
+    <p class="section-label">Who we are</p>
+    <h2>More Than Logistics — <em>A Deep Understanding</em> of Africa</h2>
+    <div class="intro-stat-row">
+      <div class="intro-stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Countries</div>
+      </div>
+      <div class="intro-stat">
+        <div class="stat-num">9+</div>
+        <div class="stat-label">Curated Tours</div>
+      </div>
+    </div>
+  </div>
+  <div class="intro-right reveal reveal-delay">
+    <p>61 Kingdom is a Kenya-based destination management company specialising in incentive travel, luxury tailor-made journeys, and MICE programs across Kenya and East Africa. With over 20 years of professional experience, we combine deep local expertise with international service standards to create travel programs that are seamless, memorable, and professionally executed.</p>
+    <p>At 61 Kingdom, we believe travel in Africa should go beyond logistics. It should create meaningful connections between people, culture, wildlife, and landscapes. Every journey we design is built on a strong understanding of the destination, local communities, and the expectations of international travellers.</p>
+    <p>Africa offers extraordinary opportunities for travel, but operating in this dynamic environment requires more than planning — it demands strong local networks, efficient coordination, and the ability to adapt quickly when circumstances change. That is where 61 Kingdom stands apart.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- VISION & MISSION -->
+<section class="vm">
+  <div class="reveal">
+    <p class="section-label">Our direction</p>
+    <h2 class="section-title" style="color:var(--white)">Vision &amp; Mission</h2>
+  </div>
+  <div class="vm-grid reveal reveal-delay">
+    <div class="vm-card">
+      <div class="vm-icon"></div>
+      <h3>Our Vision</h3>
+      <p>To become the most respected inbound tourism service provider in Kenya and across East Africa — connecting the wonders of Africa with the world through exceptional customer service, sustainable tourism practices, and carefully curated travel experiences.</p>
+    </div>
+    <div class="vm-card">
+      <div class="vm-icon"></div>
+      <h3>Our Mission</h3>
+      <p>To connect people with nature and support a sustainable future. We aim to protect the natural environment through internationally minded professional standards, create meaningful travel experiences for guests from around the world, and promote the enduring value of Africa's natural wonders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-header reveal">
+    <p class="section-label">What we stand for</p>
+    <h2 class="section-title">Our Core Values</h2>
+  </div>
+  <div class="values-grid reveal reveal-delay">
+    <div class="value-card">
+      <div class="value-num">01</div>
+      <h3>Responsibility &amp; Accountability</h3>
+      <p>We value commitment, results, and safety. Staff take ownership, act responsibly, support guests, and maintain safety as a non-negotiable standard.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-num">02</div>
+      <h3>Integrity</h3>
+      <p>We value honesty, openness, and trust. Every team member works in an honest, reliable, and responsible manner to protect our reputation and client trust.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-num">03</div>
+      <h3>Professionalism</h3>
+      <p>We uphold professional standards and strive for daily excellence. Every staff member's conduct, communication, and work reflect the company's image.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-num">04</div>
+      <h3>Efficiency</h3>
+      <p>We value responsiveness and timely communication, ensuring smooth operations and a consistently positive experience for every guest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="image-break">
+  <div class="image-break-quote reveal">
+    <p>"We are a team of professionals with a deep passion for travel — a window to adventure, cultural discovery, and personal growth."</p>
+    <span>61 Kingdom — Nairobi, Kenya</span>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="team-header reveal">
+    <div>
+      <p class="section-label">The people behind the journeys</p>
+      <h2 class="section-title">Our Team</h2>
+    </div>
+  </div>
+
+  <!-- Leadership -->
+  <p class="team-section-label reveal">Leadership</p>
+  <div class="team-leadership reveal reveal-delay">
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/05/iz.png" alt="Isaac Waweru" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>IW</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Isaac Waweru</h4>
+        <p>Business Operations &amp; Marketing</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/06/winnie2.jpg" alt="Winnie Wambui" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>WW</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Winnie Wambui</h4>
+        <p>Group Operations Director</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/Gregory-Yara-Transport-and-Logistics.jpg" alt="Gregory Yara" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>GY</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Gregory Yara</h4>
+        <p>Transport &amp; Logistics</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/07/op.jpg" alt="Gift Musyoki" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>GM</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Gift Musyoki</h4>
+        <p>Operations</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Field Team -->
+  <p class="team-section-label reveal">Field &amp; Expert Team</p>
+  <div class="team-grid reveal reveal-delay">
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/06/maurice.jpg" alt="Morris Marete" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>MM</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Morris Marete</h4>
+        <p>Driver Guide</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/Robert-Kiarie-scaled.jpg" alt="Robert Kiarie" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>RK</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Robert Kiarie</h4>
+        <p>Driver Guide</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/Nicholas-Theuri-scaled.jpg" alt="Nicholas Theuri" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>NT</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Nicholas Theuri</h4>
+        <p>Driver Guide</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/Stanley-Kamau-scaled.jpg" alt="Stanley Kamau" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>SK</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Stanley Kamau</h4>
+        <p>Driver Guide</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/ATUBWA-HOWARD-Herpetologist-scaled.jpg" alt="Howard Atubwa" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>HA</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Howard Atubwa</h4>
+        <p>Herpetologist</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/BENARD-KIPROTICH-Entomologist-scaled.jpg" alt="Bernard Kiprotich" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>BK</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Bernard Kiprotich</h4>
+        <p>Entomologist</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/04/RICHARD-KIPNGENO-Orithologist-scaled.jpg" alt="Richard Kipngeno" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>RK</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Richard Kipngeno</h4>
+        <p>Ornithologist</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/05/e3.png" alt="Hezekiah Obwangi" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>HO</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Hezekiah Obwangi</h4>
+        <p>Wildlife Ecologist</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-04-18-at-09.17.41.jpeg" alt="Alyson Omondi" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>AO</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Alyson Omondi</h4>
+        <p>IT &amp; Digital Operations</p>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="member-img-wrap">
+        <img src="https://61kingdom.com/wp-content/uploads/2026/07/ddfdf.jpg" alt="Gladys Nyamoita" onerror="this.parentElement.innerHTML='<div class=\'member-img-placeholder\'><span>GN</span></div>'">
+      </div>
+      <div class="member-info">
+        <h4>Gladys Nyamoita</h4>
+        <p>Operations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-title">Let's Talk About<br>Your Travel Dreams</h2>
+    <div class="contact-detail" style="margin-top:50px;">
+      <div class="contact-item">
+        <p class="contact-item-label">Email</p>
+        <p class="contact-item-val"><a href="mailto:info@61kingdom.com">info@61kingdom.com</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-item-label">Phone</p>
+        <p class="contact-item-val"><a href="tel:+25411414660085">+254 1141466085</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-item-label">Location</p>
+        <p class="contact-item-val">GTC, Westlands, Nairobi</p>
+        <a class="map-link" href="https://www.google.com/maps/place/Global+Trade+Center+Office+Tower/@-1.2710148,36.8056234,17z" target="_blank">View on Google Maps →</a>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form reveal reveal-delay">
+    <div class="form-field">
+      <label>Full Name</label>
+      <input type="text" placeholder="Your name">
+    </div>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com">
+    </div>
+    <div class="form-field">
+      <label>How can we help?</label>
+      <textarea rows="4" placeholder="Tell us about your travel plans…"></textarea>
+    </div>
+    <button class="form-submit">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <h2>61 Kingdom</h2>
+    <p>Don't just get there — get there in style. Crafting extraordinary journeys across East Africa.</p>
+    <p class="footer-contact-item">GTC, Westlands, Nairobi</p>
+    <p class="footer-contact-item">+254 1141466085</p>
+    <p class="footer-contact-item">info@61kingdom.com</p>
+  </div>
+  <div class="footer-col">
+    <h4>Destinations</h4>
+    <ul>
+      <li><a href="#">Kenya</a></li>
+      <li><a href="#">Tanzania</a></li>
+      <li><a href="#">Uganda</a></li>
+      <li><a href="#">Rwanda</a></li>
+      <li><a href="#">Ethiopia</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Information</h4>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Tours</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">FAQs</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Travel Tips</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 61 Kingdom. All rights reserved.</p>
+  <p>Facebook · Instagram · YouTube</p>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

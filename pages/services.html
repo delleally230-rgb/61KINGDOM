@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — 61 Kingdom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --clay:  #C8A97E;
+    --ink:   #1A1714;
+    --sand:  #F4EFE8;
+    --stone: #8C8075;
+    --white: #FDFCFA;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    background: rgba(253,252,250,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,23,20,0.08);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: var(--ink); letter-spacing: 0.15em;
+    text-decoration: none; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; color: var(--stone); transition: color 0.3s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--clay); }
+  .nav-cta {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--white);
+    background: var(--clay); padding: 10px 24px; transition: background 0.3s;
+  }
+  .nav-cta:hover { background: #b8976a; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    height: 65vh; min-height: 500px;
+    position: relative; display: flex; align-items: flex-end; overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(26,23,20,0.15) 0%, rgba(26,23,20,0.7) 100%),
+      url('https://images.unsplash.com/photo-1504432842672-1a79f78e4084?w=1800&q=80') center/cover no-repeat;
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.04); } to { transform: scale(1.0); }
+  }
+  .page-hero-content { position: relative; padding: 0 60px 80px; width: 100%; }
+  .breadcrumb {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-bottom: 18px;
+    opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+  .breadcrumb a { color: var(--clay); text-decoration: none; }
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6.5vw, 84px); font-weight: 300; line-height: 1.03;
+    color: var(--white); max-width: 700px;
+    opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--clay); }
+  .page-hero-sub {
+    font-size: 15px; color: rgba(255,255,255,0.65);
+    max-width: 560px; margin-top: 20px; line-height: 1.75;
+    opacity: 0; animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HELPERS ── */
+  .section-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.5vw, 50px); font-weight: 300; line-height: 1.1; color: var(--ink);
+  }
+  .divider { border: none; border-top: 1px solid rgba(26,23,20,0.08); margin: 0; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    padding: 80px 60px;
+    display: grid; grid-template-columns: 1fr 2px 1fr; gap: 60px; align-items: center;
+    background: var(--sand);
+  }
+  .intro-strip-divider { background: rgba(26,23,20,0.1); align-self: stretch; }
+  .intro-strip p { font-size: 16px; line-height: 1.8; color: var(--stone); }
+  .intro-strip-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: 28px;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--clay);
+    border-bottom: 1px solid var(--clay); padding-bottom: 2px;
+  }
+
+  /* ── SERVICES GRID ── */
+  .services-section { padding: 120px 60px; }
+  .services-header { margin-bottom: 70px; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(26,23,20,0.08);
+  }
+  .service-card {
+    background: var(--white);
+    padding: 52px 44px 56px;
+    position: relative; overflow: hidden;
+    transition: background 0.35s;
+    cursor: default;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover { background: var(--sand); }
+  .service-card:hover::after { width: 100%; }
+
+  .service-icon {
+    width: 44px; height: 44px;
+    margin-bottom: 28px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-icon svg { width: 100%; height: 100%; }
+
+  .service-num {
+    position: absolute; top: 36px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: rgba(200,169,126,0.13);
+    transition: color 0.35s;
+  }
+  .service-card:hover .service-num { color: rgba(200,169,126,0.22); }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 400; color: var(--ink); margin-bottom: 16px;
+  }
+  .service-card p { font-size: 14px; line-height: 1.85; color: var(--stone); }
+
+  /* ── PROMISE ── */
+  .promise {
+    background: var(--ink); padding: 100px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+  }
+  .promise-left .section-label { color: var(--clay); }
+  .promise-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.5vw, 50px); font-weight: 300; line-height: 1.1;
+    color: var(--white); margin-bottom: 30px;
+  }
+  .promise-left h2 em { font-style: italic; color: var(--clay); }
+  .promise-left p { font-size: 15px; line-height: 1.85; color: var(--stone); margin-bottom: 36px; }
+  .btn-clay {
+    display: inline-block;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--ink);
+    background: var(--clay); padding: 16px 36px;
+    transition: background 0.3s;
+  }
+  .btn-clay:hover { background: #b8976a; }
+  .promise-right { display: flex; flex-direction: column; gap: 1px; }
+  .promise-item {
+    display: flex; align-items: flex-start; gap: 24px;
+    padding: 28px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+  .promise-item:hover { background: rgba(255,255,255,0.07); }
+  .promise-item-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 300; color: var(--clay);
+    flex-shrink: 0; padding-top: 2px;
+  }
+  .promise-item-text h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; color: var(--white); margin-bottom: 6px;
+  }
+  .promise-item-text p { font-size: 13px; line-height: 1.7; color: var(--stone); }
+
+  /* ── GALLERY MOSAIC ── */
+  .gallery-section { padding: 120px 60px; }
+  .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; }
+  .gallery-header a {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--clay); text-decoration: none;
+    border-bottom: 1px solid var(--clay); padding-bottom: 2px;
+  }
+  .mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 260px 200px 260px;
+    gap: 3px;
+  }
+  .mosaic-cell {
+    overflow: hidden; position: relative; background: var(--sand);
+  }
+  .mosaic-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.7s ease;
+    display: block;
+  }
+  .mosaic-cell:hover img { transform: scale(1.07); }
+
+  /* layout spans */
+  .mc-1 { grid-column: 1/3; grid-row: 1/2; }
+  .mc-2 { grid-column: 3/4; grid-row: 1/2; }
+  .mc-3 { grid-column: 4/5; grid-row: 1/3; }
+  .mc-4 { grid-column: 1/2; grid-row: 2/4; }
+  .mc-5 { grid-column: 2/3; grid-row: 2/3; }
+  .mc-6 { grid-column: 3/4; grid-row: 2/3; }
+  .mc-7 { grid-column: 2/4; grid-row: 3/4; }
+  .mc-8 { grid-column: 4/5; grid-row: 3/4; }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--sand);
+    padding: 90px 60px;
+    display: flex; align-items: center; justify-content: space-between; gap: 60px;
+  }
+  .cta-strip-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3vw, 44px); font-weight: 300; color: var(--ink); line-height: 1.15;
+  }
+  .cta-strip-left h2 em { font-style: italic; color: var(--clay); }
+  .cta-strip-left p { margin-top: 14px; font-size: 15px; color: var(--stone); max-width: 480px; line-height: 1.7; }
+  .cta-strip-right { flex-shrink: 0; }
+  .btn-ink {
+    display: inline-block;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--white);
+    background: var(--ink); padding: 18px 44px;
+    transition: background 0.3s;
+  }
+  .btn-ink:hover { background: #333; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 60px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--white);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .footer-brand p { font-size: 13px; line-height: 1.7; color: var(--stone); margin-bottom: 24px; }
+  .footer-contact-item { font-size: 13px; color: var(--stone); margin-bottom: 6px; }
+  .footer-col h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 24px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 13px; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    background: var(--ink); padding: 20px 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">61 Kingdom</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#destinations">Destinations</a></li>
+    <li><a href="#">Tours</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Plan a Trip</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="breadcrumb"><a href="../index.html">Home</a> &nbsp;/&nbsp; Services</p>
+    <h1>Complete Travel<br>Solutions, <em>Beautifully</em><br>Executed</h1>
+    <p class="page-hero-sub">From airport arrivals to guided safaris — we handle every detail so you can focus entirely on the experience.</p>
+  </div>
+</div>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="reveal">
+    <p class="section-label">What we offer</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,2.5vw,38px);font-weight:300;line-height:1.2;color:var(--ink);margin-bottom:20px;">
+      We're the team behind seamless travel experiences and unforgettable journeys.
+    </h2>
+    <a href="#contact" class="intro-strip-cta">Get in touch →</a>
+  </div>
+  <div class="intro-strip-divider"></div>
+  <div class="reveal reveal-d1">
+    <p>At 61 Kingdom, we deliver seamless, end-to-end travel solutions designed to make every journey effortless, secure, and memorable. Whether you are travelling for business or leisure, our services are tailored to your specific needs — delivered with efficiency and professionalism.</p>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="services-header reveal">
+    <p class="section-label">Our offerings</p>
+    <h2 class="section-title">What We Do For You</h2>
+  </div>
+
+  <div class="services-grid">
+    <!-- 01 Airport Transfers -->
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32L22 8L36 32" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 26H32" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="22" cy="36" r="2" fill="#C8A97E"/>
+        </svg>
+      </div>
+      <h3>Airport Transfers</h3>
+      <p>Start and end your journey stress-free with our reliable airport transfer services. Punctual pick-ups, professional drivers, and a range of comfortable vehicles for individuals, families, and corporate travellers.</p>
+    </div>
+
+    <!-- 02 Hotel Booking -->
+    <div class="service-card reveal reveal-d1">
+      <span class="service-num">02</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="16" width="28" height="22" rx="1" stroke="#C8A97E" stroke-width="1.5"/>
+          <path d="M14 16V10H30V16" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="18" y="26" width="8" height="12" stroke="#C8A97E" stroke-width="1.3"/>
+          <rect x="12" y="22" width="5" height="4" rx="0.5" stroke="#C8A97E" stroke-width="1.2"/>
+          <rect x="27" y="22" width="5" height="4" rx="0.5" stroke="#C8A97E" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <h3>Hotel Booking</h3>
+      <p>We take the hassle out of finding perfect accommodation. Through our extensive network of trusted hotel partners, we offer options from budget-friendly stays to luxury lodges — carefully matched to your preferences and budget.</p>
+    </div>
+
+    <!-- 03 Visa Assistance -->
+    <div class="service-card reveal reveal-d2">
+      <span class="service-num">03</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="12" width="30" height="20" rx="2" stroke="#C8A97E" stroke-width="1.5"/>
+          <path d="M7 18H37" stroke="#C8A97E" stroke-width="1.5"/>
+          <circle cx="14" cy="26" r="3" stroke="#C8A97E" stroke-width="1.3"/>
+          <path d="M20 24H30M20 28H26" stroke="#C8A97E" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Visa Assistance</h3>
+      <p>Navigating visa requirements can be complex, but we make it simple. Expert guidance on application procedures, documentation, and submission processes to improve your chances of a successful application while saving you time and stress.</p>
+    </div>
+
+    <!-- 04 Car Hire -->
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 26L10 16H34L38 26V32H6V26Z" stroke="#C8A97E" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="13" cy="32" r="3" stroke="#C8A97E" stroke-width="1.5"/>
+          <circle cx="31" cy="32" r="3" stroke="#C8A97E" stroke-width="1.5"/>
+          <path d="M16 32H28" stroke="#C8A97E" stroke-width="1.5"/>
+          <path d="M11 22H33" stroke="#C8A97E" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M20 16V22" stroke="#C8A97E" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Car Hire</h3>
+      <p>Enjoy flexibility and convenience with our car hire services. Whether you need a vehicle for city travel, business meetings, or extended trips — well-maintained cars with or without professional drivers, ensuring safety and comfort throughout.</p>
+    </div>
+
+    <!-- 05 Travel Insurance -->
+    <div class="service-card reveal reveal-d1">
+      <span class="service-num">05</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 8L36 13V24C36 31 22 38 22 38C22 38 8 31 8 24V13L22 8Z" stroke="#C8A97E" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M16 22L20 26L28 18" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Travel Insurance</h3>
+      <p>Travel with confidence knowing you are fully protected. Comprehensive travel insurance covering medical emergencies, trip cancellations, lost luggage, and other unforeseen circumstances — giving you complete peace of mind wherever you go.</p>
+    </div>
+
+    <!-- 06 Guided Tours -->
+    <div class="service-card reveal reveal-d2">
+      <span class="service-num">06</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="18" r="7" stroke="#C8A97E" stroke-width="1.5"/>
+          <path d="M10 36C10 29.4 15.4 24 22 24C28.6 24 34 29.4 34 36" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M30 12L38 8M30 16L38 18" stroke="#C8A97E" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Guided Tours</h3>
+      <p>Discover destinations in a deeper, more meaningful way with our expertly curated guided tours. Our knowledgeable guides bring each location to life with cultural insights, local experiences, and personalised itineraries that ensure every trip is unforgettable.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROMISE / WHY US -->
+<section class="promise">
+  <div class="reveal">
+    <p class="section-label">Why choose us</p>
+    <h2>Going Places —<br><em>With You,</em><br>Every Step</h2>
+    <p>With over 20 years of professional experience in East Africa, we understand that successful travel requires more than planning. It demands strong local networks, efficient coordination, and the agility to adapt when circumstances change.</p>
+    <a href="#contact" class="btn-clay">Start Planning</a>
+  </div>
+  <div class="promise-right reveal reveal-d1">
+    <div class="promise-item">
+      <span class="promise-item-num">01</span>
+      <div class="promise-item-text">
+        <h4>Deep Local Expertise</h4>
+        <p>20+ years of on-the-ground experience across Kenya and East Africa means nothing catches us off-guard.</p>
+      </div>
+    </div>
+    <div class="promise-item">
+      <span class="promise-item-num">02</span>
+      <div class="promise-item-text">
+        <h4>International Standards</h4>
+        <p>We combine African authenticity with the service standards that international travellers expect and trust.</p>
+      </div>
+    </div>
+    <div class="promise-item">
+      <span class="promise-item-num">03</span>
+      <div class="promise-item-text">
+        <h4>Fully Tailored</h4>
+        <p>Every journey is built around you — your style, interests, budget, and timeline. Nothing is off the shelf.</p>
+      </div>
+    </div>
+    <div class="promise-item">
+      <span class="promise-item-num">04</span>
+      <div class="promise-item-text">
+        <h4>End-to-End Management</h4>
+        <p>From the first enquiry to your return flight, we manage every detail so you never have to worry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-header reveal">
+    <div>
+      <p class="section-label">Picture yourself here</p>
+      <h2 class="section-title">A Glimpse of What Awaits</h2>
+    </div>
+    <a href="#">View Gallery →</a>
+  </div>
+
+  <div class="mosaic reveal">
+    <div class="mosaic-cell mc-1">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/limboko-woman-945325_1920.jpg" alt="Maasai woman">
+    </div>
+    <div class="mosaic-cell mc-2">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/djlithos-savana-6038129_1920.jpg" alt="Savanna landscape">
+    </div>
+    <div class="mosaic-cell mc-3">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/akiroq-grey-crowned-crane-1502935-scaled.jpg" alt="Grey crowned crane">
+    </div>
+    <div class="mosaic-cell mc-4">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/tracyhammond-white-water-rafting-354505_1920.jpg" alt="White water rafting">
+    </div>
+    <div class="mosaic-cell mc-5">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/afrikit-ethiopia-634222_1920.jpg" alt="Ethiopia">
+    </div>
+    <div class="mosaic-cell mc-6">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/lynnx10-male-1229760_1920.jpg" alt="Lion">
+    </div>
+    <div class="mosaic-cell mc-7">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/Kenya-1.jpg" alt="Kenya">
+    </div>
+    <div class="mosaic-cell mc-8">
+      <img src="https://61kingdom.com/wp-content/uploads/2026/03/ramalholore-masai-1330808_1920.jpg" alt="Masai">
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="reveal">
+    <h2>A Trusted Way to<br>Explore the World <em>With Ease</em></h2>
+    <p>Join the travellers who trust 61 Kingdom to turn their dream journeys into seamless realities — across Kenya and all of East Africa.</p>
+  </div>
+  <div class="reveal reveal-d1">
+    <a href="#" class="btn-ink">Browse All Tours</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <h2>61 Kingdom</h2>
+    <p>Don't just get there — get there in style. Crafting extraordinary journeys across East Africa.</p>
+    <p class="footer-contact-item">GTC, Westlands, Nairobi</p>
+    <p class="footer-contact-item">+254 1141466085</p>
+    <p class="footer-contact-item">info@61kingdom.com</p>
+  </div>
+  <div class="footer-col">
+    <h4>Destinations</h4>
+    <ul>
+      <li><a href="#">Kenya</a></li>
+      <li><a href="#">Tanzania</a></li>
+      <li><a href="#">Uganda</a></li>
+      <li><a href="#">Rwanda</a></li>
+      <li><a href="#">Ethiopia</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Information</h4>
+    <ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="#">Tours</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">FAQs</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Travel Tips</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 61 Kingdom. All rights reserved.</p>
+  <p>Facebook · Instagram · YouTube</p>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
